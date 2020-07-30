@@ -66,6 +66,7 @@ class App extends React.Component {
         {this.state.homepage === true ? <HomePage handleClick={this.handleClick}/> : null}
         {this.state.F1 === true ? <FormOne handleClick={this.handleClick}/> : null}
         {this.state.F2 === true ? <FormTwo handleClick={this.handleClick}/> : null}
+        {this.state.F3 === true ? <FormThree handleClick={this.handleClick}/> : null}
       </div>
     )
   }
@@ -178,6 +179,54 @@ class FormTwo extends React.Component {
             <input type='text' value={this.state.phoneNumber} onChange={this.handleChange}/>
         </form>
         <button value={'F3'} onClick={this.props.handleClick}>Next</button>
+      </div>
+    )
+  }
+}
+
+class FormThree extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      creditCard: '',
+      expiration: '',
+      cvv: '',
+      billingZipCode: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    console.log(event);
+    this.setState({
+      creditCard: '',
+      expiration: '',
+      cvv: '',
+      billingZipCode: ''
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <form>
+          <label>Credit Card #</label>
+            <input type='text' value={this.state.addressOne} onChange={this.handleChange}/>
+        </form>
+        <form>
+          <label>Expiration Date</label>
+            <input type='text' value={this.state.addressTwo} onChange={this.handleChange}/>
+        </form>
+        <form>
+          <label>CVV</label>
+            <input type='text' value={this.state.city} onChange={this.handleChange}/>
+        </form>
+        <form>
+          <label>Billing Zip Code</label>
+            <input type='text' value={this.state.state} onChange={this.handleChange}/>
+        </form>
+        <button value={'F4'} onClick={this.props.handleClick}>Next</button>
       </div>
     )
   }
