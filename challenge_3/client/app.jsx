@@ -64,7 +64,8 @@ class App extends React.Component {
     return (
       <div>
         {this.state.homepage === true ? <HomePage handleClick={this.handleClick}/> : null}
-        {this.state.F1 === true ? <FormOne /> : null}
+        {this.state.F1 === true ? <FormOne handleClick={this.handleClick}/> : null}
+        {this.state.F2 === true ? <FormTwo handleClick={this.handleClick}/> : null}
       </div>
     )
   }
@@ -116,7 +117,7 @@ class FormOne extends React.Component {
           <label>Password</label>
             <input type='text' value={this.state.password} onChange={this.handleChange}/>
         </form>
-        <button>Next</button>
+        <button value={'F2'} onClick={this.props.handleClick}>Next</button>
       </div>
     )
   }
@@ -176,7 +177,7 @@ class FormTwo extends React.Component {
           <label>Phone Number</label>
             <input type='text' value={this.state.phoneNumber} onChange={this.handleChange}/>
         </form>
-        <button>Next</button>
+        <button value={'F3'} onClick={this.props.handleClick}>Next</button>
       </div>
     )
   }
