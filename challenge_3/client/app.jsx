@@ -2,15 +2,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    // reformat to have only one item and have that change the string based on what page I'm showing - ben pernick
     this.state = {
-      homepage: true,
-      F1: false,
-      F2: false,
-      F3: false,
-      confirmation: false,
-      formOne: [],
-      formTwo: [],
-      formThree: []
+      currentPage: ''
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -20,28 +14,34 @@ class App extends React.Component {
   handleClick(event) {
     event.preventDefault();
     console.log(event.target.value);
-    this.changePage(event.target.value);
+    // this.changePage(event.target.value);
+    this.setState({
+      currentPage: event.target.value
+    })
   }
 
   componentDidMount() {
     this.setState({
-      homepage: true,
-      F1: false,
-      F2: false,
-      F3: false,
-      confirmation: false,
-      formOne: [],
-      formTwo: [],
-      formThree: []
+      currentPage: 'homepage'
     });
   }
 
   changePage(toggleKey) {
-    var stateCopy = {...this.state};
-    var nextValue = !stateCopy[toggleKey];
-    Object.keys(stateCopy).forEach(key => stateCopy[key] = false);
-    stateCopy[toggleKey] = nextValue;
-    this.setState(stateCopy);
+    // // create a copy of the this.state object to modify
+    // var stateCopy = {...this.state};
+    // // create a variable to be the opposite of the boolean value for the input key
+    // var nextValue = !stateCopy[toggleKey];
+    // // iterate over every key in this.state copy
+    // // Object.keys(stateCopy).forEach(key => stateCopy[key] = false);
+    // Object.keys(stateCopy).forEach(function(key) {
+    //   if (typeof stateCopy[key] === 'boolean') {
+    //     stateCopy[key] = false;
+    //   }
+    // }
+    // stateCopy[toggleKey] = nextValue;
+    this.setState({
+      currentPage: toggleKey
+    });
   }
 
   addData(data) {
@@ -73,10 +73,10 @@ class App extends React.Component {
 
     return (
       <div>
-        {this.state.homepage === true ? <HomePage handleClick={this.handleClick}/> : null}
-        {this.state.F1 === true ? <FormOne handleClick={this.handleClick}/> : null}
-        {this.state.F2 === true ? <FormTwo handleClick={this.handleClick}/> : null}
-        {this.state.F3 === true ? <FormThree handleClick={this.handleClick}/> : null}
+        {this.state.currentPage === 'homepage' ? <HomePage handleClick={this.handleClick}/> : null}
+        {this.state.currentPage === 'F1' ? <FormOne handleClick={this.handleClick}/> : null}
+        {this.state.currentPage === 'F2' ? <FormTwo handleClick={this.handleClick}/> : null}
+        {this.state.currentPage === 'F3' ? <FormThree handleClick={this.handleClick}/> : null}
       </div>
     )
   }
