@@ -60,8 +60,11 @@ class App extends React.Component {
     return (
       <div>
         {this.state.currentPage === 'homepage' ? <HomePage state={this.state} addData={this.addData} handleClick={this.handleClick}/> : null}
+
         {this.state.currentPage === 'F1' ? <FormOne state={this.state} handleChange={this.handleChange} handleClick={this.handleClick}/> : null}
+
         {this.state.currentPage === 'F2' ? <FormTwo state={this.state} handleChange={this.handleChange} handleClick={this.handleClick}/> : null}
+
         {this.state.currentPage === 'F3' ? <FormThree state={this.state} handleChange={this.handleChange} handleClick={this.handleClick}/> : null}
       </div>
     )
@@ -73,6 +76,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
 function HomePage(props) {
   return (
     <div>
+      <h1>Ready to Checkout?</h1>
       <button value={'F1'} onClick={props.handleClick}>Checkout</button>
     </div>
   )
@@ -81,6 +85,7 @@ function HomePage(props) {
 function FormOne(props) {
   return (
     <div>
+      <h1>Login</h1>
       <form>
         <label>Name</label>
           <input type='text' name='name' value={props.state.name} onChange={props.handleChange}/>
@@ -91,7 +96,7 @@ function FormOne(props) {
       </form>
       <form>
         <label>Password</label>
-          <input type='text' name='password' value={props.state.password} onChange={props.handleChange}/>
+          <input type='password' name='password' value={props.state.password} onChange={props.handleChange}/>
       </form>
       <button value={'F2'} onClick={props.handleClick}>Next</button>
     </div>
@@ -101,6 +106,7 @@ function FormOne(props) {
 function FormTwo(props) {
   return (
     <div>
+      <h1>Shipping/Billing Address</h1>
       <form>
         <label>Address</label>
           <input type='text' name='address1' value={props.state.addressOne} onChange={props.handleChange}/>
@@ -130,52 +136,29 @@ function FormTwo(props) {
   )
 }
 
-class FormThree extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      creditCard: '',
-      expiration: '',
-      cvv: '',
-      billingZipCode: ''
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
-    console.log(event);
-    this.setState({
-      creditCard: '',
-      expiration: '',
-      cvv: '',
-      billingZipCode: ''
-    })
-  }
-
-  render() {
-    return (
-      <div>
-        <form>
-          <label>Credit Card #</label>
-            <input type='text' value={this.state.addressOne} onChange={this.handleChange}/>
-        </form>
-        <form>
-          <label>Expiration Date</label>
-            <input type='text' value={this.state.addressTwo} onChange={this.handleChange}/>
-        </form>
-        <form>
-          <label>CVV</label>
-            <input type='text' value={this.state.city} onChange={this.handleChange}/>
-        </form>
-        <form>
-          <label>Billing Zip Code</label>
-            <input type='text' value={this.state.state} onChange={this.handleChange}/>
-        </form>
-        <button value={'F4'} onClick={this.props.handleClick}>Next</button>
-      </div>
-    )
-  }
+function FormThree(props) {
+  return (
+    <div>
+      <h1>Billing Information</h1>
+      <form>
+        <label>Credit Card #</label>
+          <input type='text' name='creditCard' value={props.state.creditCard} onChange={props.handleChange}/>
+      </form>
+      <form>
+        <label>Expiration Date</label>
+          <input type='text' name='expiration' value={props.state.expiration} onChange={props.handleChange}/>
+      </form>
+      <form>
+        <label>CVV</label>
+          <input type='text' name='cvv' value={props.state.cvv} onChange={props.handleChange}/>
+      </form>
+      <form>
+        <label>Billing Zip Code</label>
+          <input type='text' name='billingZipCode' value={props.state.billingZipCode} onChange={props.handleChange}/>
+      </form>
+      <button value={'F4'} onClick={props.handleClick}>Next</button>
+    </div>
+  )
 }
 
 class Confirmation extends React.Component {
